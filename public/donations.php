@@ -1,7 +1,13 @@
 <?php
 require __DIR__ . '/../config/db.php';
-session_start();
-if (empty($_SESSION['user'])) { header('Location: login.php'); exit; }
+require __DIR__ . '/../includes/auth.php';
+require_login();
+
+if (!can_manage_donations()) {
+    $_SESSION['flash'] = 'Access denied. You do not have permission to manage donations.';
+    header('Location: index.php');
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add') {
     $donor = $_POST['donor_name'] ?? '';

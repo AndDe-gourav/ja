@@ -1,12 +1,18 @@
 <?php
 require __DIR__ . '/../config/db.php';
-session_start();
-if (empty($_SESSION['user'])) { header('Location: login.php'); exit; }
+require __DIR__ . '/../includes/auth.php';
+require_login();
+
+if (!can_manage_feedback()) {
+    $_SESSION['flash'] = 'Access denied. You do not have permission to manage feedback.';
+    header('Location: index.php');
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['message'])) {
     $student_id = $_POST['student_id'] ?: null;
     $message = $_POST['message'];
-    $submitted_by = $_SESSION['user']['name'] ?? 'unknown';
+    $submitted_by = current_user()['name'] ?? 'unknown';
     $stmt = $pdo->prepare("INSERT INTO feedback (student_id, message, submitted_by) VALUES (?,?,?)");
     $stmt->execute([$student_id ?: null, $message, $submitted_by]);
     $_SESSION['flash'] = 'Feedback submitted successfully!';

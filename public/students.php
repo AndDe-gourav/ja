@@ -1,7 +1,14 @@
 <?php
 require __DIR__ . '/../config/db.php';
-session_start();
-if (empty($_SESSION['user'])) { header('Location: login.php'); exit; }
+require __DIR__ . '/../includes/auth.php';
+require_login(); // Require login first
+
+// Check permissions (admin or volunteer can manage students)
+if (!can_manage_students()) {
+    $_SESSION['flash'] = 'Access denied. You do not have permission to manage students.';
+    header('Location: index.php');
+    exit;
+}
 
 $q = $_GET['q'] ?? '';
 $params = [];
