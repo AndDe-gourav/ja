@@ -17,11 +17,11 @@ if ($pdo) {
 ?>
 <main class="container hero">
   <div class="hero-left">
-    <h1>Student support made simple.</h1>
-    <p class="lead">Manage students, donations, volunteers, assignments and feedback in one lightweight app for small organisations and college projects.</p>
+    <h1>Empower Every Student's Journey</h1>
+    <p class="lead">Transform the way you manage student support with Jagriti - a complete platform for tracking students, donations, volunteers, assignments, and feedback. Built for educators, NGOs, and community organizations.</p>
     <div class="cta-row">
       <a class="btn" href="students.php">Manage Students</a>
-      <a class="btn ghost" href="donations.php">Record Donations</a>
+      <a class="btn ghost" href="donations.php">Track Donations</a>
     </div>
 
     <div class="stats">
@@ -46,34 +46,51 @@ if ($pdo) {
 
   <div class="hero-right">
     <svg viewBox="0 0 600 440" aria-hidden="true" class="illustration">
-      <rect x="20" y="20" width="560" height="400" rx="16" fill="#fff" stroke="#e6e9ee" />
+      <rect x="20" y="20" width="560" height="400" rx="16" fill="#fff" stroke="#fed7aa" stroke-width="3" />
       <g transform="translate(60,60)">
-        <rect width="200" height="120" rx="12" fill="#111827" opacity="0.95"></rect>
-        <rect x="220" width="200" height="40" rx="8" fill="#f3f4f6"></rect>
-        <rect x="220" y="60" width="200" height="20" rx="6" fill="#f3f4f6"></rect>
-        <circle cx="40" cy="170" r="30" fill="#fde68a"></circle>
+        <rect width="200" height="120" rx="12" fill="#f97316" opacity="0.95"></rect>
+        <rect x="220" width="200" height="40" rx="8" fill="#ffedd5"></rect>
+        <rect x="220" y="60" width="200" height="20" rx="6" fill="#fed7aa"></rect>
+        <circle cx="40" cy="170" r="30" fill="#fb923c"></circle>
+        <circle cx="120" cy="190" r="25" fill="#fdba74"></circle>
+        <rect x="180" y="160" width="240" height="60" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"></rect>
       </g>
     </svg>
   </div>
 </main>
 
 <section class="container features">
-  <h2>What you can do</h2>
+  <h2>Everything You Need in One Place</h2>
   <div class="grid-3">
     <div class="feature-card">
       <div class="icon">👩‍🎓</div>
       <h3>Student Management</h3>
-      <p>Add, edit and track students with contact and class details.</p>
+      <p>Track student profiles, contact details, academic information, and progress reports all in one organized system.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">💰</div>
+      <h3>Donation Tracking</h3>
+      <p>Record and manage all donations - both monetary and material. Keep transparent records for donors and generate reports easily.</p>
     </div>
     <div class="feature-card">
       <div class="icon">🤝</div>
-      <h3>Donations</h3>
-      <p>Record cash and item donations, keep a running log and receipts.</p>
+      <h3>Volunteer Network</h3>
+      <p>Build and manage your volunteer community. Track skills, availability, and contributions to maximize impact.</p>
     </div>
     <div class="feature-card">
-      <div class="icon">🧑‍🏫</div>
-      <h3>Volunteers</h3>
-      <p>Manage volunteers, their skills and contact details.</p>
+      <div class="icon">📚</div>
+      <h3>Assignment System</h3>
+      <p>Create, distribute, and track assignments efficiently. Monitor due dates and student submissions in real-time.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">💬</div>
+      <h3>Feedback Collection</h3>
+      <p>Gather valuable feedback from students, parents, and volunteers to continuously improve your programs.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">📖</div>
+      <h3>Library Management</h3>
+      <p>Maintain a catalog of books and educational resources. Track lending and returns with ease.</p>
     </div>
   </div>
 </section>
@@ -81,11 +98,14 @@ if ($pdo) {
 <section class="container about">
   <div class="about-card">
     <h2>About Jagriti</h2>
-    <p>Jagriti is a compact student support system built with plain PHP, HTML and CSS — ideal for college projects and small NGO use. It focuses on practical features and a simple UI so administrators and volunteers can manage operations quickly.</p>
+    <p>Jagriti means "awakening" in Hindi, and that's exactly what we aim to do - awaken the potential in every student through better management and support systems.</p>
+    <p>Built with simplicity and effectiveness in mind, Jagriti is perfect for small to medium-sized educational organizations, NGOs, and community programs. Our platform helps you focus on what matters most: empowering students to succeed.</p>
     <ul>
-      <li>Lightweight — runs on XAMPP / LAMP</li>
-      <li>Secure basics — prepared statements and hashed passwords</li>
-      <li>Easily extensible — add modules for reports, messaging, and more</li>
+      <li><strong>Lightweight & Fast</strong> - No complex setup required, runs smoothly on any server</li>
+      <li><strong>Secure by Design</strong> - Password encryption, session management, and prepared SQL statements</li>
+      <li><strong>Easy to Customize</strong> - Built with simple PHP, HTML, and CSS for easy modifications</li>
+      <li><strong>Data-Driven Insights</strong> - Track metrics and generate reports to measure your impact</li>
+      <li><strong>Community Focused</strong> - Designed by educators for educators and social workers</li>
     </ul>
   </div>
 </section>
