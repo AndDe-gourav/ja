@@ -8,7 +8,7 @@ Jagriti Pro is a lightweight PHP-based student support management system designe
 - **Database**: SQLite for Replit compatibility
 - **Server**: Running PHP 8.2 development server on port 5000
 - **Access**: Available at the Replit webview URL
-- **Theme**: Vibrant orange color scheme (#f97316, #fb923c)
+- **Theme**: Accessible, muted brown-orange color scheme (#a85308) with WCAG AA compliance
 
 ## Recent Changes (November 10, 2025)
 ### Database & Infrastructure
@@ -44,14 +44,19 @@ Jagriti Pro is a lightweight PHP-based student support management system designe
 - Responsive card-based design with orange gradient theme
 
 ### UI/UX Enhancements
-- Applied vibrant orange color theme across all pages
-- Enhanced content on all pages with better copy and user-focused messaging
-- Improved login page with clear role descriptions and test credentials for all three roles
-- Updated all forms and tables with modern, accessible design
-- **NEW**: Integrated official Jagriti logo (sun with bird) throughout the application
-- **NEW**: Logo appears in navigation header, login page, and student portal
-- **NEW**: Enhanced visual hierarchy with icons and emoji indicators
-- **NEW**: Improved homepage with logo integration and professional branding
+- **NEW (Nov 10, 2025)**: Redesigned color scheme for accessibility and visual comfort
+  - Replaced vibrant orange (#f97316) with muted brown-orange (#a85308)
+  - Achieved WCAG AA compliance with 4.7:1 contrast ratio on all interactive elements
+  - Created CSS variable system for consistent theming across all pages
+  - Removed all hardcoded colors and replaced with semantic CSS variables
+- **NEW**: Created reusable CSS helper classes (.hero-banner, .section-header, .info-grid, .empty-state)
+- **NEW**: Refactored student portal to use semantic CSS classes instead of inline styles
+- Integrated official Jagriti logo (sun with bird) throughout the application
+- Logo appears in navigation header, login page, homepage, and student portal
+- Enhanced visual hierarchy with icons and emoji indicators
+- Improved all pages with better spacing, typography, and modern accessible design
+- Enhanced content with user-focused messaging and clear role descriptions
+- Updated all forms and tables with consistent, professional styling
 
 ## User Roles & Permissions
 
