@@ -37,12 +37,10 @@ include __DIR__ . '/../includes/header.php';
 include __DIR__ . '/../includes/navbar.php';
 ?>
 
-<div class="hero-section" style="background: linear-gradient(135deg, #f97316 0%, #fb923c 100%); padding: 3rem 0; margin-bottom: 2rem; border-radius: 12px;">
-  <div class="container" style="text-align: center; color: white;">
-    <img src="assets/images/jagriti-logo.jpeg" alt="Jagriti Logo" style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 1rem; border: 4px solid white; object-fit: cover;">
-    <h1 style="font-size: 2.5rem; margin: 0;">Welcome, <?= htmlspecialchars($student['name']) ?>! 🌅</h1>
-    <p style="font-size: 1.2rem; margin: 0.5rem 0 0 0; opacity: 0.95;">Your Learning Journey with Jagriti</p>
-  </div>
+<div class="hero-banner">
+  <img src="assets/images/jagriti-logo.jpeg" alt="Jagriti Logo">
+  <h1>Welcome, <?= htmlspecialchars($student['name']) ?>!</h1>
+  <p>Your Learning Journey with Jagriti</p>
 </div>
 
 <div class="container">
@@ -51,70 +49,70 @@ include __DIR__ . '/../includes/navbar.php';
     <?php unset($_SESSION['flash']); ?>
   <?php endif; ?>
 
-  <div class="card-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-    <div class="card" style="background: linear-gradient(135deg, #f97316 0%, #fb923c 100%); color: white; text-align: center; padding: 2rem;">
-      <div style="font-size: 3rem; margin-bottom: 0.5rem;">👤</div>
-      <h3 style="margin: 0; font-size: 1.1rem; opacity: 0.9;">Student ID</h3>
-      <p style="font-size: 1.8rem; font-weight: bold; margin: 0.5rem 0 0 0;"><?= htmlspecialchars($student['roll']) ?></p>
+  <div class="card-grid">
+    <div class="stat">
+      <div style="font-size: 48px; margin-bottom: 12px;">👤</div>
+      <div class="label">Student ID</div>
+      <div class="num" style="font-size: 24px; margin-top: 8px;"><?= htmlspecialchars($student['roll']) ?></div>
     </div>
     
-    <div class="card" style="background: linear-gradient(135deg, #fb923c 0%, #fdba74 100%); color: white; text-align: center; padding: 2rem;">
-      <div style="font-size: 3rem; margin-bottom: 0.5rem;">📚</div>
-      <h3 style="margin: 0; font-size: 1.1rem; opacity: 0.9;">Class</h3>
-      <p style="font-size: 1.8rem; font-weight: bold; margin: 0.5rem 0 0 0;"><?= htmlspecialchars($student['class']) ?></p>
+    <div class="stat">
+      <div style="font-size: 48px; margin-bottom: 12px;">📚</div>
+      <div class="label">Class</div>
+      <div class="num" style="font-size: 24px; margin-top: 8px;"><?= htmlspecialchars($student['class']) ?></div>
     </div>
     
-    <div class="card" style="background: linear-gradient(135deg, #fdba74 0%, #fed7aa 100%); color: #78350f; text-align: center; padding: 2rem;">
-      <div style="font-size: 3rem; margin-bottom: 0.5rem;">📝</div>
-      <h3 style="margin: 0; font-size: 1.1rem; opacity: 0.9;">Assignments</h3>
-      <p style="font-size: 1.8rem; font-weight: bold; margin: 0.5rem 0 0 0;"><?= count($assignments) ?></p>
+    <div class="stat">
+      <div style="font-size: 48px; margin-bottom: 12px;">📝</div>
+      <div class="label">Assignments</div>
+      <div class="num" style="font-size: 24px; margin-top: 8px;"><?= count($assignments) ?></div>
     </div>
   </div>
 
   <!-- My Profile Section -->
-  <div class="card" style="margin-bottom: 2rem;">
-    <div style="display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 3px solid #f97316; padding-bottom: 0.5rem;">
-      <span style="font-size: 1.5rem; margin-right: 0.5rem;">📋</span>
-      <h2 style="margin: 0; color: #f97316;">My Profile</h2>
+  <div class="card">
+    <div class="section-header">
+      <span>📋</span>
+      <h2>My Profile</h2>
     </div>
     
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-      <div>
-        <strong style="color: #78350f;">Full Name:</strong>
-        <p style="margin: 0.25rem 0 0 0;"><?= htmlspecialchars($student['name']) ?></p>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Full Name</strong>
+        <p><?= htmlspecialchars($student['name']) ?></p>
       </div>
-      <div>
-        <strong style="color: #78350f;">Roll Number:</strong>
-        <p style="margin: 0.25rem 0 0 0;"><?= htmlspecialchars($student['roll']) ?></p>
+      <div class="info-item">
+        <strong>Roll Number</strong>
+        <p><?= htmlspecialchars($student['roll']) ?></p>
       </div>
-      <div>
-        <strong style="color: #78350f;">Age:</strong>
-        <p style="margin: 0.25rem 0 0 0;"><?= htmlspecialchars($student['age']) ?> years</p>
+      <div class="info-item">
+        <strong>Age</strong>
+        <p><?= htmlspecialchars($student['age']) ?> years</p>
       </div>
-      <div>
-        <strong style="color: #78350f;">Class:</strong>
-        <p style="margin: 0.25rem 0 0 0;"><?= htmlspecialchars($student['class']) ?></p>
+      <div class="info-item">
+        <strong>Class</strong>
+        <p><?= htmlspecialchars($student['class']) ?></p>
       </div>
-      <div>
-        <strong style="color: #78350f;">Parent Contact:</strong>
-        <p style="margin: 0.25rem 0 0 0;"><?= htmlspecialchars($student['parent_contact']) ?></p>
+      <div class="info-item">
+        <strong>Parent Contact</strong>
+        <p><?= htmlspecialchars($student['parent_contact']) ?></p>
       </div>
-      <div>
-        <strong style="color: #78350f;">Address:</strong>
-        <p style="margin: 0.25rem 0 0 0;"><?= htmlspecialchars($student['address'] ?? 'Not provided') ?></p>
+      <div class="info-item">
+        <strong>Address</strong>
+        <p><?= htmlspecialchars($student['address'] ?? 'Not provided') ?></p>
       </div>
     </div>
   </div>
 
   <!-- My Assignments Section -->
-  <div class="card" style="margin-bottom: 2rem;">
-    <div style="display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 3px solid #f97316; padding-bottom: 0.5rem;">
-      <span style="font-size: 1.5rem; margin-right: 0.5rem;">📝</span>
-      <h2 style="margin: 0; color: #f97316;">My Assignments</h2>
+  <div class="card">
+    <div class="section-header">
+      <span>📝</span>
+      <h2>My Assignments</h2>
     </div>
     
     <?php if (empty($assignments)): ?>
-      <p style="color: #78350f; text-align: center; padding: 2rem;">No assignments yet. Check back later! 📚</p>
+      <p class="empty-state">No assignments yet. Check back later! 📚</p>
     <?php else: ?>
       <div class="table-responsive">
         <table>
@@ -152,14 +150,14 @@ include __DIR__ . '/../includes/navbar.php';
   </div>
 
   <!-- Available Books Section -->
-  <div class="card" style="margin-bottom: 2rem;">
-    <div style="display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 3px solid #f97316; padding-bottom: 0.5rem;">
-      <span style="font-size: 1.5rem; margin-right: 0.5rem;">📚</span>
-      <h2 style="margin: 0; color: #f97316;">Library Books</h2>
+  <div class="card">
+    <div class="section-header">
+      <span>📚</span>
+      <h2>Library Books</h2>
     </div>
     
     <?php if (empty($books)): ?>
-      <p style="color: #78350f; text-align: center; padding: 2rem;">No books available in the library yet. 📖</p>
+      <p class="empty-state">No books available in the library yet. 📖</p>
     <?php else: ?>
       <div class="table-responsive">
         <table>
@@ -186,13 +184,13 @@ include __DIR__ . '/../includes/navbar.php';
 
   <!-- My Feedback Section -->
   <div class="card">
-    <div style="display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 3px solid #f97316; padding-bottom: 0.5rem;">
-      <span style="font-size: 1.5rem; margin-right: 0.5rem;">💬</span>
-      <h2 style="margin: 0; color: #f97316;">My Feedback</h2>
+    <div class="section-header">
+      <span>💬</span>
+      <h2>My Feedback</h2>
     </div>
     
     <?php if (empty($feedback)): ?>
-      <p style="color: #78350f; text-align: center; padding: 2rem;">No feedback yet. Keep up the great work! 🌟</p>
+      <p class="empty-state">No feedback yet. Keep up the great work! 🌟</p>
     <?php else: ?>
       <div class="table-responsive">
         <table>

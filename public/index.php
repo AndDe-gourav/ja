@@ -25,7 +25,7 @@ if ($pdo) {
 <main class="container hero">
   <div class="hero-left">
     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-      <img src="assets/images/jagriti-logo.jpeg" alt="Jagriti" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #f97316;">
+      <img src="assets/images/jagriti-logo.jpeg" alt="Jagriti" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent);">
       <h1 style="margin: 0;">Empower Every Student's Journey</h1>
     </div>
     <p class="lead">Transform the way you manage student support with Jagriti - a complete platform for tracking students, donations, volunteers, assignments, and feedback. Built for educators, NGOs, and community organizations.</p>
@@ -56,14 +56,14 @@ if ($pdo) {
 
   <div class="hero-right">
     <svg viewBox="0 0 600 440" aria-hidden="true" class="illustration">
-      <rect x="20" y="20" width="560" height="400" rx="16" fill="#fff" stroke="#fed7aa" stroke-width="3" />
+      <rect x="20" y="20" width="560" height="400" rx="16" fill="#fff" stroke="#e7e5e4" stroke-width="3" />
       <g transform="translate(60,60)">
-        <rect width="200" height="120" rx="12" fill="#f97316" opacity="0.95"></rect>
-        <rect x="220" width="200" height="40" rx="8" fill="#ffedd5"></rect>
-        <rect x="220" y="60" width="200" height="20" rx="6" fill="#fed7aa"></rect>
-        <circle cx="40" cy="170" r="30" fill="#fb923c"></circle>
-        <circle cx="120" cy="190" r="25" fill="#fdba74"></circle>
-        <rect x="180" y="160" width="240" height="60" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"></rect>
+        <rect width="200" height="120" rx="12" fill="#a85308" opacity="0.95"></rect>
+        <rect x="220" width="200" height="40" rx="8" fill="#fef3c7"></rect>
+        <rect x="220" y="60" width="200" height="20" rx="6" fill="#e7e5e4"></rect>
+        <circle cx="40" cy="170" r="30" fill="#c2630f"></circle>
+        <circle cx="120" cy="190" r="25" fill="#d97706"></circle>
+        <rect x="180" y="160" width="240" height="60" rx="10" fill="#fafaf9" stroke="#a85308" stroke-width="2"></rect>
       </g>
     </svg>
   </div>
