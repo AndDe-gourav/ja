@@ -8,13 +8,13 @@ if ($pdo === null) {
 
 $queries = [];
 
-// users - SQLite compatible
+// users - SQLite compatible with volunteer role
 $queries[] = "CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(150) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
-  role VARCHAR(10) NOT NULL DEFAULT 'staff' CHECK(role IN ('admin','staff')),
+  role VARCHAR(10) NOT NULL DEFAULT 'volunteer' CHECK(role IN ('admin','volunteer')),
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );";
 
@@ -95,6 +95,20 @@ if (!$stmt->fetch()) {
     echo "<p>Admin created: email={$adminEmail} password={$adminPassword}</p>\n";
 } else {
     echo "<p>Admin already exists.</p>\n";
+}
+
+// create default volunteer if not exists
+$volunteerEmail = 'volunteer@jagriti.local';
+$stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->execute([$volunteerEmail]);
+if (!$stmt->fetch()) {
+    $volunteerPassword = 'volunteer123';
+    $hash = password_hash($volunteerPassword, PASSWORD_DEFAULT);
+    $ins = $pdo->prepare("INSERT INTO users (name,email,password,role) VALUES (?,?,?, 'volunteer')");
+    $ins->execute(['Volunteer User', $volunteerEmail, $hash]);
+    echo "<p>Volunteer created: email={$volunteerEmail} password={$volunteerPassword}</p>\n";
+} else {
+    echo "<p>Volunteer already exists.</p>\n";
 }
 
 echo "<p>Setup finished. Database initialized successfully with SQLite.</p>\n";
