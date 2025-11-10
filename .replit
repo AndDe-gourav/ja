@@ -1,4 +1,4 @@
-modules = ["php-8.2", "web"]
+modules = ["php-8.2", "web", "postgresql-16"]
 [agent]
 expertMode = true
 
@@ -37,6 +37,10 @@ externalPort = 80
 [[ports]]
 localPort = 34099
 externalPort = 3000
+
+[[ports]]
+localPort = 34243
+externalPort = 3001
 
 [deployment]
 deploymentTarget = "autoscale"

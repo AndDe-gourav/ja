@@ -1,7 +1,8 @@
 <?php
 require __DIR__ . '/../config/db.php';
-session_start();
-if (!empty($_SESSION['user'])) {
+require __DIR__ . '/../includes/auth.php';
+
+if (is_logged_in()) {
     header('Location: index.php'); exit;
 }
 $err = '';
@@ -47,14 +48,33 @@ include __DIR__ . '/../includes/navbar.php';
       </div>
     </form>
     
-    <div style="margin-top: 24px; padding-top: 24px; border-top: 2px solid var(--border); text-align: center;">
-      <p style="color: var(--muted); font-size: 14px; margin: 0;">
-        <strong>Default Admin Credentials:</strong><br>
-        Email: <code style="color: var(--accent);">admin@jagriti.local</code><br>
-        Password: <code style="color: var(--accent);">admin123</code>
-      </p>
-      <p style="color: var(--muted); font-size: 12px; margin-top: 8px;">
-        Please change these credentials after your first login
+    <div style="margin-top: 24px; padding-top: 24px; border-top: 2px solid var(--border);">
+      <p style="color: var(--muted); font-size: 14px; margin-bottom: 16px; font-weight: 600;">Default Test Accounts:</p>
+      
+      <div style="background: var(--accent-light); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+        <p style="margin: 0; font-size: 13px;"><strong style="color: var(--accent);">Administrator Account</strong></p>
+        <p style="margin: 4px 0 0 0; font-size: 13px;">
+          Email: <code style="color: var(--accent);">admin@jagriti.local</code><br>
+          Password: <code style="color: var(--accent);">admin123</code>
+        </p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--muted);">
+          Full access: Can manage users, volunteers, and all data
+        </p>
+      </div>
+      
+      <div style="background: #fff7ed; padding: 12px; border-radius: 8px; border: 1px solid var(--border);">
+        <p style="margin: 0; font-size: 13px;"><strong style="color: var(--accent-2);">Volunteer Account</strong></p>
+        <p style="margin: 4px 0 0 0; font-size: 13px;">
+          Email: <code style="color: var(--accent-2);">volunteer@jagriti.local</code><br>
+          Password: <code style="color: var(--accent-2);">volunteer123</code>
+        </p>
+        <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--muted);">
+          Limited access: Can manage students, donations, assignments, books, feedback
+        </p>
+      </div>
+      
+      <p style="color: var(--muted); font-size: 12px; margin-top: 12px; text-align: center;">
+        ⚠️ Please change these passwords after first login
       </p>
     </div>
   </div>
