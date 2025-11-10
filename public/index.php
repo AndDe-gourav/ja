@@ -1,6 +1,13 @@
 <?php
 require __DIR__ . '/../config/db.php';
-session_start();
+require __DIR__ . '/../includes/auth.php';
+
+// Redirect students to their portal
+if (is_logged_in() && is_student()) {
+    header('Location: student_portal.php');
+    exit;
+}
+
 include __DIR__ . '/../includes/header.php';
 include __DIR__ . '/../includes/navbar.php';
 
@@ -17,7 +24,10 @@ if ($pdo) {
 ?>
 <main class="container hero">
   <div class="hero-left">
-    <h1>Empower Every Student's Journey</h1>
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+      <img src="assets/images/jagriti-logo.jpeg" alt="Jagriti" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #f97316;">
+      <h1 style="margin: 0;">Empower Every Student's Journey</h1>
+    </div>
     <p class="lead">Transform the way you manage student support with Jagriti - a complete platform for tracking students, donations, volunteers, assignments, and feedback. Built for educators, NGOs, and community organizations.</p>
     <div class="cta-row">
       <a class="btn" href="students.php">Manage Students</a>

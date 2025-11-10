@@ -8,26 +8,29 @@ if ($pdo === null) {
 
 $queries = [];
 
-// users - SQLite compatible with volunteer role
+// users - SQLite compatible with admin, volunteer, and student roles
 $queries[] = "CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(150) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
-  role VARCHAR(10) NOT NULL DEFAULT 'volunteer' CHECK(role IN ('admin','volunteer')),
+  role VARCHAR(10) NOT NULL DEFAULT 'volunteer' CHECK(role IN ('admin','volunteer','student')),
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );";
 
-// students
+// students - now linked to users table
 $queries[] = "CREATE TABLE IF NOT EXISTS students (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NULL,
   name VARCHAR(150) NOT NULL,
   roll VARCHAR(50) DEFAULT NULL,
   age INTEGER DEFAULT NULL,
   class VARCHAR(50) DEFAULT NULL,
   parent_contact VARCHAR(100) DEFAULT NULL,
+  address TEXT,
   notes TEXT,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );";
 
 // donations
@@ -109,6 +112,26 @@ if (!$stmt->fetch()) {
     echo "<p>Volunteer created: email={$volunteerEmail} password={$volunteerPassword}</p>\n";
 } else {
     echo "<p>Volunteer already exists.</p>\n";
+}
+
+// create sample student account if not exists
+$studentEmail = 'student@jagriti.local';
+$stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->execute([$studentEmail]);
+if (!$stmt->fetch()) {
+    $studentPassword = 'student123';
+    $hash = password_hash($studentPassword, PASSWORD_DEFAULT);
+    $ins = $pdo->prepare("INSERT INTO users (name,email,password,role) VALUES (?,?,?, 'student')");
+    $ins->execute(['Rahul Kumar', $studentEmail, $hash]);
+    $studentUserId = $pdo->lastInsertId();
+    
+    // Create corresponding student record
+    $ins = $pdo->prepare("INSERT INTO students (user_id, name, roll, age, class, parent_contact, address) VALUES (?,?,?,?,?,?,?)");
+    $ins->execute([$studentUserId, 'Rahul Kumar', 'STU001', 16, 'Class 10', '9876543210', 'Delhi, India']);
+    
+    echo "<p>Student created: email={$studentEmail} password={$studentPassword}</p>\n";
+} else {
+    echo "<p>Student account already exists.</p>\n";
 }
 
 echo "<p>Setup finished. Database initialized successfully with SQLite.</p>\n";

@@ -16,30 +16,48 @@ Jagriti Pro is a lightweight PHP-based student support management system designe
 - Updated `config/db.php` to use SQLite with PDO
 - Modified `setup.php` to create SQLite-compatible schema
 - Created startup script `start.sh` for PHP development server
-- Initialized database with default admin and volunteer users
+- Initialized database with default admin, volunteer, and student users
 - Added `.gitignore` for SQLite database files
 - Configured workflow to run PHP server on port 5000
+- **NEW**: Added `user_id` column to students table to link student records with user accounts
+- **NEW**: Added `address` column to students table for complete student profiles
 
 ### Role-Based Access Control (RBAC)
-- Implemented comprehensive RBAC system with two roles: **admin** and **volunteer**
+- Implemented comprehensive RBAC system with three roles: **admin**, **volunteer**, and **student**
 - Created centralized authentication system in `includes/auth.php`
-- Added permission helper functions (`require_admin()`, `can_manage_students()`, etc.)
+- Added permission helper functions (`require_admin()`, `require_staff()`, `can_manage_students()`, etc.)
 - Updated all pages and API endpoints with proper permission checks
 - Created admin-only user management interface (`public/users.php`)
 - Restricted volunteer management to admin-only access
 - Updated navigation menu to show/hide links based on user role
+- **NEW**: Added `is_student()` helper function and `get_student_record()` for student data access
+- **NEW**: Implemented role-based redirects (students → portal, staff → dashboard)
+
+### Student Portal (NEW)
+- Created dedicated student portal (`public/student_portal.php`) with personalized dashboard
+- Students can view their profile, assignments, available books, and feedback
+- Beautiful hero section with Jagriti logo and welcoming message
+- Color-coded stats cards showing student ID, class, and assignment count
+- Assignment status tracking (active vs past due)
+- Library books catalog with titles, authors, and availability
+- Personal feedback history from teachers and administrators
+- Responsive card-based design with orange gradient theme
 
 ### UI/UX Enhancements
 - Applied vibrant orange color theme across all pages
 - Enhanced content on all pages with better copy and user-focused messaging
-- Improved login page with clear role descriptions and test credentials
+- Improved login page with clear role descriptions and test credentials for all three roles
 - Updated all forms and tables with modern, accessible design
+- **NEW**: Integrated official Jagriti logo (sun with bird) throughout the application
+- **NEW**: Logo appears in navigation header, login page, and student portal
+- **NEW**: Enhanced visual hierarchy with icons and emoji indicators
+- **NEW**: Improved homepage with logo integration and professional branding
 
 ## User Roles & Permissions
 
 ### Administrator Role
 **Full system access** - Can manage everything
-- ✅ Manage users (create/delete volunteer and admin accounts)
+- ✅ Manage users (create/delete volunteer, admin, and student accounts)
 - ✅ Manage volunteers (add/remove volunteers)
 - ✅ Manage students, donations, assignments, books, feedback
 - ✅ View all reports and statistics
@@ -52,6 +70,15 @@ Jagriti Pro is a lightweight PHP-based student support management system designe
 - ✅ Manage assignments (create/track student assignments)
 - ✅ Manage books (library inventory management)
 - ✅ Manage feedback (student feedback and reviews)
+
+### Student Role (NEW)
+**Read-only personal portal** - Can only view their own information
+- ✅ View personal profile (name, roll number, class, age, contact)
+- ✅ View all assignments with due dates and status
+- ✅ Browse available library books
+- ✅ View feedback from teachers and administrators
+- ❌ Cannot access management features or other students' data
+- ❌ Cannot modify any data (read-only access)
 
 ## Project Architecture
 
@@ -76,23 +103,26 @@ jagriti_pro/
 │   ├── navbar.php   # Role-aware navigation
 │   └── footer.php
 ├── public/          # Web-accessible pages
-│   ├── assets/css/style.css  # Orange theme styles
-│   ├── index.php            # Dashboard
-│   ├── login.php            # Login with test credentials
+│   ├── assets/
+│   │   ├── css/style.css           # Orange theme styles
+│   │   └── images/jagriti-logo.jpeg # Official Jagriti logo
+│   ├── index.php            # Dashboard (staff only)
+│   ├── login.php            # Login with test credentials (all roles)
+│   ├── student_portal.php   # Student dashboard (NEW)
 │   ├── users.php            # Admin-only user management
-│   ├── students.php         # Student management
-│   ├── donations.php        # Donation tracking
+│   ├── students.php         # Student management (staff only)
+│   ├── donations.php        # Donation tracking (staff only)
 │   ├── volunteers.php       # Admin-only volunteer management
-│   ├── feedback.php         # Feedback management
-│   ├── assignments.php      # Assignment tracking
-│   └── books.php           # Book library
+│   ├── feedback.php         # Feedback management (staff only)
+│   ├── assignments.php      # Assignment tracking (staff only)
+│   └── books.php           # Book library (staff only)
 ├── setup.php        # Database initialization script
 └── start.sh         # Server startup script
 ```
 
 ### Database Schema (SQLite)
-- **users**: User accounts with roles (admin/volunteer), hashed passwords
-- **students**: Student records with contact information
+- **users**: User accounts with roles (admin/volunteer/student), hashed passwords
+- **students**: Student records with contact information and optional link to user account (user_id)
 - **donations**: Cash and item donation tracking
 - **volunteers**: Volunteer management with skills
 - **feedback**: Feedback linked to students
@@ -117,6 +147,13 @@ jagriti_pro/
 - **Email**: volunteer@jagriti.local
 - **Password**: volunteer123
 - **Access**: Limited to students, donations, assignments, books, feedback
+
+### Student Account (NEW)
+- **Email**: student@jagriti.local
+- **Password**: student123
+- **Name**: Rahul Kumar
+- **Roll Number**: STU001
+- **Access**: Read-only student portal with personal information
 
 ⚠️ **Important**: Change these passwords after first login for security
 

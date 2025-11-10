@@ -32,6 +32,11 @@ function is_volunteer() {
     return current_role() === 'volunteer';
 }
 
+// Check if current user is student
+function is_student() {
+    return current_role() === 'student';
+}
+
 // Require user to be logged in
 function require_login() {
     if (!is_logged_in()) {
@@ -99,11 +104,35 @@ function get_index_url() {
     return 'index.php';
 }
 
+// Require user to be admin or volunteer (staff access)
+function require_staff() {
+    require_login();
+    if (!is_admin() && !is_volunteer()) {
+        $_SESSION['flash'] = 'Access denied. Staff privileges required.';
+        header('Location: ' . get_index_url());
+        exit;
+    }
+}
+
+// Get student record for current user
+function get_student_record() {
+    if (!is_student()) {
+        return null;
+    }
+    
+    global $pdo;
+    $user = current_user();
+    $stmt = $pdo->prepare("SELECT * FROM students WHERE user_id = ? LIMIT 1");
+    $stmt->execute([$user['id']]);
+    return $stmt->fetch();
+}
+
 // Display user-friendly role name
 function get_role_name($role) {
     $roles = [
         'admin' => 'Administrator',
         'volunteer' => 'Volunteer',
+        'student' => 'Student',
     ];
     return $roles[$role] ?? ucfirst($role);
 }
