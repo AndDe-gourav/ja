@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'add')
     $skills = $_POST['skills'] ?? '';
     $stmt = $pdo->prepare("INSERT INTO volunteers (name, email, phone, skills) VALUES (?,?,?,?)");
     $stmt->execute([$name, $email, $phone, $skills]);
-    $_SESSION['flash'] = 'Volunteer added.';
+    $_SESSION['flash'] = 'Volunteer added successfully!';
     header('Location: volunteers.php'); exit;
 }
 
@@ -23,29 +23,70 @@ include __DIR__ . '/../includes/header.php';
 include __DIR__ . '/../includes/navbar.php';
 ?>
 <div class="container">
-  <h1>Volunteers</h1>
-  <form method="post">
-    <input type="hidden" name="action" value="add">
-    <label>Name</label><input name="name" required>
-    <label>Email</label><input name="email">
-    <label>Phone</label><input name="phone">
-    <label>Skills</label><textarea name="skills"></textarea>
-    <button class="btn" type="submit">Add Volunteer</button>
-  </form>
+  <h1>Volunteer Network</h1>
+  <p style="color: var(--muted); margin-bottom: 20px;">Build and manage your volunteer community. Track their skills, contact information, and availability to maximize your program's impact.</p>
+  
+  <?php if (!empty($_SESSION['flash'])): ?>
+    <div class="success"><?= $_SESSION['flash'] ?></div>
+    <?php unset($_SESSION['flash']); ?>
+  <?php endif; ?>
 
-  <h2>All Volunteers</h2>
-  <table class="striped">
-    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th></tr></thead>
-    <tbody>
-      <?php foreach($rows as $r): ?>
-      <tr>
-        <td><?=$r['id']?></td>
-        <td><?=htmlspecialchars($r['name'])?></td>
-        <td><?=htmlspecialchars($r['email'])?></td>
-        <td><?=htmlspecialchars($r['phone'])?></td>
-      </tr>
-      <?php endforeach;?>
-    </tbody>
-  </table>
+  <div class="panel">
+    <h2>Add New Volunteer</h2>
+    <form method="post">
+      <input type="hidden" name="action" value="add">
+      
+      <label><strong>Volunteer Name *</strong></label>
+      <input name="name" required placeholder="Full name of the volunteer">
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div>
+          <label><strong>Email Address</strong></label>
+          <input name="email" type="email" placeholder="volunteer@example.com">
+        </div>
+        <div>
+          <label><strong>Phone Number</strong></label>
+          <input name="phone" type="tel" placeholder="+1 234 567 8900">
+        </div>
+      </div>
+      
+      <label><strong>Skills & Expertise</strong></label>
+      <textarea name="skills" rows="3" placeholder="List their skills, qualifications, areas of interest, and availability (e.g., Teaching, Tutoring Math, Weekend availability)"></textarea>
+      
+      <button class="btn" type="submit">Add Volunteer</button>
+    </form>
+  </div>
+
+  <div class="panel">
+    <h2>All Volunteers (<?php echo count($rows); ?> total)</h2>
+    <?php if (empty($rows)): ?>
+      <p style="color: var(--muted); padding: 20px; text-align: center;">No volunteers registered yet. Use the form above to add your first volunteer.</p>
+    <?php else: ?>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Skills & Expertise</th>
+          <th>Joined</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($rows as $r): ?>
+        <tr>
+          <td><?=$r['id']?></td>
+          <td><strong><?=htmlspecialchars($r['name'])?></strong></td>
+          <td><?=htmlspecialchars($r['email'] ?: '-')?></td>
+          <td><?=htmlspecialchars($r['phone'] ?: '-')?></td>
+          <td><?=htmlspecialchars($r['skills'] ?: '-')?></td>
+          <td><?=$r['created_at']?></td>
+        </tr>
+        <?php endforeach;?>
+      </tbody>
+    </table>
+    <?php endif; ?>
+  </div>
 </div>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
